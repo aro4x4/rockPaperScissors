@@ -39,7 +39,7 @@ else {
     console.log("       |Player points:", playerPoints, "Computer points:", computerPoints );
 }
 
-//game
+//five round game
 function game() {
 console.log("       |   ROUND 1 / 5");
 playRound();
