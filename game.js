@@ -1,9 +1,9 @@
-
-console.log("       |--ROCK - PAPER - SCISSORS--");
-
 //player input
 const buttons = document.querySelectorAll('.button');
+
 buttons.forEach(button => button.addEventListener('click', () => playRound(button.innerHTML , computerPlay())));
+buttons.forEach(button => button.addEventListener('mousedown', () => button.classList.add('playing')));
+buttons.forEach(button => button.addEventListener('mouseup', () => button.classList.remove('playing')));
 
 var int_playerPoints = 0;
 
@@ -18,47 +18,35 @@ var int_computerPoints = 0;
 
 //play round
 function playRound(playerSelection, computerSelection) {
-    console.log("       |   Player choice: " + playerSelection);
-    console.log("       |   Computer choice: " + computerSelection);
     const result = playerSelection + computerSelection;
     if (playerSelection == computerSelection) {
-    console.log("       | It's a tie.");
+    document.getElementById('roundResult').textContent = "It's a tie.";
 }
 
 else if (result == "rockscissors" || result == "paperrock" || result == "scissorspaper") {
-    console.log("       | You win! " + playerSelection + " beats " + computerSelection);
+    document.getElementById('roundResult').textContent = "You win! " + playerSelection + " beats " + computerSelection;
     int_playerPoints = int_playerPoints + 1;
 }
 else {
-    console.log("       | You lose. " + computerSelection + " beats " + playerSelection);
+    document.getElementById('roundResult').textContent = "You lose. " + computerSelection + " beats " + playerSelection;
     int_computerPoints = int_computerPoints + 1;
 }
-    console.log("       |Player points:", int_playerPoints, "Computer points:", int_computerPoints );
-}
+    document.getElementById('choices').textContent = 'You chose: ' + playerSelection + ' |   Computer chose: ' + computerSelection;
+    document.getElementById('playerScore').textContent = 'Your points: ' + int_playerPoints;
+    document.getElementById('computerScore').textContent = 'Computer points: ' + int_computerPoints;
 
-//five round game
-//function game() {
-//console.log("       |   ROUND 1 / 5");
-//playRound();
-//console.log("       |   ROUND 2 / 5");
-//playRound();
-//console.log("       |   ROUND 3 / 5");
-//playRound();
-//console.log("       |   ROUND 4 / 5");
-//playRound();
-//console.log("       |   ROUND 5 / 5");
-//playRound();
-//function winner () {
-//    if (int_playerPoints == int_computerPoints) {
-//        console.log("       |--IT'S A TIE--");
-//    }
-//    else if (int_playerPoints > int_computerPoints) {
-//        console.log("       |--Congratulations, YOU WON!--");
-//    }
-//    else {
-//        console.log("       |--YOU LOST--");
-//    }
-//}
-//winner()
-//}
-//game()
+    if (int_playerPoints == 5) {
+        document.getElementById('roundResult').textContent = 'CONGRATULATIONS, YOU WON!';
+        document.getElementById('choices').textContent = "You are first to 5, press a button to reset score";
+        int_playerPoints = 0;
+        int_computerPoints = 0;
+        document.getElementById('roundResult').classList.add('winning');
+        document.addEventListener('transitionend', () => document.getElementById('roundResult').classList.remove('winning'));
+    }
+    else if (int_computerPoints == 5) {
+        document.getElementById('roundResult').textContent = 'COMPUTER WINS!';
+        document.getElementById('choices').textContent = "Computer is first to 5, press a button to reset score";
+        int_playerPoints = 0;
+        int_computerPoints = 0;
+    }
+}
