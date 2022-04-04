@@ -22,6 +22,7 @@ var int_computerPoints = 0;
 //play round
 function playRound(playerSelection, computerSelection) {
     const result = playerSelection + computerSelection;
+    
     if (playerSelection == computerSelection) {
     document.getElementById('roundResult').textContent = "It's a tie.";
 }
@@ -29,10 +30,19 @@ function playRound(playerSelection, computerSelection) {
 else if (result == "rockscissors" || result == "paperrock" || result == "scissorspaper") {
     document.getElementById('roundResult').textContent = "You win! " + playerSelection + " beats " + computerSelection;
     int_playerPoints = int_playerPoints + 1;
+    document.getElementById('roundResult').classList.add('winning');
+    const displayResult = document.querySelector('#roundResult');
+    displayResult.addEventListener('transitionend', () => document.getElementById('roundResult').classList.remove('winning'));
+    document.getElementById('playerScore').classList.add('winning');
+    const playerScore = document.querySelector('#playerScore');
+    playerScore.addEventListener('transitionend', () => document.getElementById('playerScore').classList.remove('winning'));
 }
 else {
     document.getElementById('roundResult').textContent = "You lose. " + computerSelection + " beats " + playerSelection;
     int_computerPoints = int_computerPoints + 1;
+    document.getElementById('computerScore').classList.add('winning');
+    const computerScore = document.querySelector('#computerScore');
+    computerScore.addEventListener('transitionend', () => document.getElementById('computerScore').classList.remove('winning'));
 }
     document.getElementById('choices').textContent = 'You chose: ' + playerSelection + ' |   Computer chose: ' + computerSelection;
     document.getElementById('playerScore').textContent = 'Your points: ' + int_playerPoints;

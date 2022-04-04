@@ -91,4 +91,6 @@ html {
     border: 1vw solid #223635;
     border-radius: 2vw;
     padding: 1vw 1vw;
+    transition: all .8s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
   }
