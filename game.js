@@ -4,6 +4,9 @@ const buttons = document.querySelectorAll('.button');
 buttons.forEach(button => button.addEventListener('click', () => playRound(button.innerHTML , computerPlay())));
 buttons.forEach(button => button.addEventListener('mousedown', () => button.classList.add('playing')));
 buttons.forEach(button => button.addEventListener('mouseup', () => button.classList.remove('playing')));
+buttons.forEach(button => button.addEventListener('touchstart', () => button.classList.add('playing')));
+buttons.forEach(button => button.addEventListener('touchend', () => button.classList.remove('playing')));
+
 
 var int_playerPoints = 0;
 
@@ -41,7 +44,8 @@ else {
         int_playerPoints = 0;
         int_computerPoints = 0;
         document.getElementById('roundResult').classList.add('winning');
-        document.addEventListener('transitionend', () => document.getElementById('roundResult').classList.remove('winning'));
+        const displayResult = document.querySelector('#roundResult');
+        displayResult.addEventListener('transitionend', () => document.getElementById('roundResult').classList.remove('winning'));
     }
     else if (int_computerPoints == 5) {
         document.getElementById('roundResult').textContent = 'COMPUTER WINS!';
